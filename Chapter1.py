@@ -12,7 +12,6 @@ class NumberCard(Card):
 
 class AceCard(Card):
     insure = True
-
     def _points(self):
         return 1, 11
 
@@ -54,4 +53,4 @@ if __name__ == "__main__":
         for rank in range(1, 14)
         for suit in (Club, Diamond, Heart, Spade)
     ]
-    print(dir(deck))
+    print(deck)
