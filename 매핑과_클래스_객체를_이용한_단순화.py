@@ -29,15 +29,11 @@ class Suit:
         return self.symbol
 
 
-def card(rank, suit):
-    if rank == 1:
-        return AceCard("A", suit)
-    elif 2 <= rank < 11:
-        return NumberCard(str(rank), suit)
-    elif 11 <= rank < 14:
-        name = {11: "J", 12: "Q", 13: "K"}[rank]
-        return FaceCard(name, suit)
-    raise Exception("Design Failure")
+def card4(rank, suit):
+    class_ = {1: AceCard, 11: FaceCard, 12: FaceCard, 13: FaceCard}.get(
+        rank, NumberCard
+    )
+    return class_(rank, suit)
 
 
 if __name__ == "__main__":
@@ -48,11 +44,10 @@ if __name__ == "__main__":
         Suit("Spade", "♠"),
     )
     deck = [
-        card(rank, suit)
+        card4(rank, suit)
         for rank in range(1, 14)
         for suit in (Club, Diamond, Heart, Spade)
     ]
-    cnt = 0
-    for i in deck:
-        cnt += 1
-    print(cnt)
+
+    for object in deck:
+        print(object.rank, object.suit)
