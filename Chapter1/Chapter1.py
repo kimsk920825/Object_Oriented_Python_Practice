@@ -1,3 +1,6 @@
+import random
+
+
 class Card:
     def __init__(self, rank, suit):
         self.suit = suit
@@ -40,6 +43,24 @@ def card(rank, suit):
     raise Exception("Design Failure")
 
 
+############
+# 덱만들기
+# 방법2
+# 컬렉션 클래스 매핑
+#############
+class Deck:
+    def __init__(self):
+        self._cards = [
+            card(rank, suit)
+            for rank in range(1, 14)
+            for suit in (Club, Diamond, Heart, Spade)
+        ]
+        random.shuffle(self._cards)
+
+    def pop(self):
+        return self._cards.pop()
+
+
 if __name__ == "__main__":
     Club, Diamond, Heart, Spade = (
         Suit("Club", "♣"),
@@ -47,12 +68,26 @@ if __name__ == "__main__":
         Suit("Heart", "♥"),
         Suit("Spade", "♠"),
     )
-    deck = [
-        card(rank, suit)
-        for rank in range(1, 14)
-        for suit in (Club, Diamond, Heart, Spade)
-    ]
-    cnt = 0
-    for i in deck:
-        cnt += 1
-    print(cnt)
+    ############
+    # 덱만들기
+    # 방법1
+    # 단순복합객체
+    #############
+    # deck = [
+    #     card(rank, suit)
+    #     for rank in range(1, 14)
+    #     for suit in (Club, Diamond, Heart, Spade)
+    # ]
+    # random.shuffle(deck)
+    # hand = [deck.pop(), deck.pop()]
+    # print(hand)
+
+    ############
+    # 덱만들기
+    # 방법2
+    # 컬렉션 클래스 매핑
+    #############
+
+    d = Deck()
+    hand = [d.pop(), d.pop()]
+    print(hand)
